@@ -29,3 +29,6 @@ loglik_EM_var(Dstar, X, V, L, theta, beta, gamma, expected)
 \description{
 \code{loglik_EM_var} Consider the "Huber Sandwich Estimator" to calculate the covariance matrix using the estimates obtained via expectation-maximization algorithm.
 }
+\examples{
+# input the estimates obtained from loglik_EM
+}

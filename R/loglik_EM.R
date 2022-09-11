@@ -21,10 +21,12 @@
 #' \item{V}{A numeric vector of the input covariate in sensitivity model.}
 #' \item{L}{A numeric vector of the input covariate in specificity model.}
 #' }
+#' @importFrom stats predict
 #' @export
 #'
 #' @examples
 #' library(DMSS)
+#' library(rje)
 #'
 #' # Generate the predictor variable and covariates
 #' X = rnorm(10000)
@@ -46,6 +48,8 @@
 #' # initial value
 #' start = c(-1,1,0,0,3,0)
 #' result = loglik_EM (Dstar,X,V,L,start,tol = 1e-8, maxit = 1000)
+
+
 
 loglik_EM <- function(Dstar, X, V, L,start, tol = 1e-8, maxit = 1000){
   n <- length(Dstar)

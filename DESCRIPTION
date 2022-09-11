@@ -13,4 +13,5 @@ RoxygenNote: 7.1.1
 Suggests: 
     renv
 Imports: 
-    rje
+    rje,
+    stats

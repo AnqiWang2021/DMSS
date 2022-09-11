@@ -2,3 +2,5 @@
 
 export(loglik_EM)
 export(loglik_EM_var)
+importFrom(rje,expit)
+importFrom(stats,predict)

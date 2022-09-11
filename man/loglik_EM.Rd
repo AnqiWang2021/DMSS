@@ -39,6 +39,7 @@ A list
 }
 \examples{
 library(DMSS)
+library(rje)
 
 # Generate the predictor variable and covariates
 X = rnorm(10000)

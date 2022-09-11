@@ -14,6 +14,9 @@
 #' @export
 #'
 #' @examples
+#' # input the estimates obtained from loglik_EM
+#' @importFrom stats predict
+#' @importFrom rje expit
 loglik_EM_var <- function(Dstar,X,V,L, theta, beta, gamma,expected)
 {
   if (!is.logical(expected) || length(expected) > 1)
@@ -61,26 +64,26 @@ loglik_EM_var <- function(Dstar,X,V,L, theta, beta, gamma,expected)
     bread.gg <- -dG1.dG * dG1.dG * tmp
   } else {
     tmp <- 1 / G1 ^ 2
-    bread.tt <- Ystar * (G1 * dG1.dTdT - dG1.dT * dG1.dT) * tmp
-    bread.tb <- Ystar * (G1 * dG1.dTdB - dG1.dT * dG1.dB) * tmp
-    bread.tg <- Ystar * (G1 * dG1.dTdG - dG1.dT * dG1.dG) * tmp
-    bread.bb <- Ystar * (G1 * dG1.dBdB - dG1.dB * dG1.dB) * tmp
-    bread.bg <- Ystar * (G1 * dG1.dGdB - dG1.dG * dG1.dB) * tmp
-    bread.gg <- Ystar * (G1 * dG1.dGdG - dG1.dG * dG1.dG) * tmp
+    bread.tt <- Dstar * (G1 * dG1.dTdT - dG1.dT * dG1.dT) * tmp
+    bread.tb <- Dstar * (G1 * dG1.dTdB - dG1.dT * dG1.dB) * tmp
+    bread.tg <- Dstar * (G1 * dG1.dTdG - dG1.dT * dG1.dG) * tmp
+    bread.bb <- Dstar * (G1 * dG1.dBdB - dG1.dB * dG1.dB) * tmp
+    bread.bg <- Dstar * (G1 * dG1.dGdB - dG1.dG * dG1.dB) * tmp
+    bread.gg <- Dstar * (G1 * dG1.dGdG - dG1.dG * dG1.dG) * tmp
 
 
     tmp <- 1 / (1 - G1) ^ 2
-    bread.tt <- bread.tt - (1 - Ystar) * ((1 - G1) * dG1.dTdT +
+    bread.tt <- bread.tt - (1 - Dstar) * ((1 - G1) * dG1.dTdT +
                                             dG1.dT * dG1.dT) * tmp
-    bread.tb <- bread.tb - (1 - Ystar) * ((1 - G1) * dG1.dTdB +
+    bread.tb <- bread.tb - (1 - Dstar) * ((1 - G1) * dG1.dTdB +
                                             dG1.dT * dG1.dB) * tmp
-    bread.tg <- bread.tg - (1 - Ystar) * ((1 - G1) * dG1.dTdG +
+    bread.tg <- bread.tg - (1 - Dstar) * ((1 - G1) * dG1.dTdG +
                                             dG1.dT * dG1.dG) * tmp
-    bread.bb <- bread.bb - (1 - Ystar) * ((1 - G1) * dG1.dBdB +
+    bread.bb <- bread.bb - (1 - Dstar) * ((1 - G1) * dG1.dBdB +
                                             dG1.dB * dG1.dB) * tmp
-    bread.bg <- bread.bg - (1 - Ystar) * ((1 - G1) * dG1.dGdB +
+    bread.bg <- bread.bg - (1 - Dstar) * ((1 - G1) * dG1.dGdB +
                                             dG1.dB * dG1.dG) * tmp
-    bread.gg <- bread.gg - (1 - Ystar) * ((1 - G1) * dG1.dGdG +
+    bread.gg <- bread.gg - (1 - Dstar) * ((1 - G1) * dG1.dGdG +
                                             dG1.dG * dG1.dG) * tmp
 
   }
@@ -99,7 +102,7 @@ loglik_EM_var <- function(Dstar,X,V,L, theta, beta, gamma,expected)
                 cbind(t(I.thetagamma), t(I.betagamma), I.gammagamma))
 
   # MEAT
-  tmp <- (Ystar - G1) / (G1 * (1 - G1))
+  tmp <- (Dstar - G1) / (G1 * (1 - G1))
   U.theta <- apply(X1, 2, function(x) tmp * dG1.dT * x)
   U.beta <- apply(V1, 2, function(v) tmp * dG1.dB * v)
   U.gamma <- apply(L1, 2, function(l) tmp * dG1.dG * l)
