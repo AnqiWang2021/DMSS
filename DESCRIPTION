@@ -1,10 +1,10 @@
 Package: DMSS
-Title: What the Package Does (One Line, Title Case)
+Title: Differential Misclassification considering Specificity and Sensitivity
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Anqi", "Wang", email = "u3007799@connect.hku.hk", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Differential Misclassification considering Specificity and Sensitivity (DMSS) model uses binary regression models to fit the covariate-related sensitivity and specificity simultaneously for the observed response.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8

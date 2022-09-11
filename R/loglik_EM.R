@@ -24,6 +24,28 @@
 #' @export
 #'
 #' @examples
+#' library(DMSS)
+#'
+#' # Generate the predictor variable and covariates
+#' X = rnorm(10000)
+#' L = rnorm(10000)
+#' V = rnorm(10000)
+#'
+#' Generate the covariate-related sensitivity and specificity
+#' theta = c(-2,3)
+#' p_Dtrue = expit(cbind(1,X)%*% theta)
+#' beta = c(0.45,0.5)
+#' sensitivity = expit(cbind(1,V)%*% beta)
+#' gamma = c(4.5,1)
+#' specificity = expit(cbind(1,L)%*% gamma)
+#'
+#' Generate the observed outcome variable
+#' p_Dstar = (1-specificity)+(specificity+sensitivity -1)*p_Dtrue
+#' Dstar = rbinom(10000,1,p_Dstar)
+#'
+#' initial value
+#' start = c(-1,1,0,0,3,0)
+#' result = loglik_EM (Dstar,X,V,L,start,tol = 1e-8, maxit = 1000)
 loglik_EM <- function(Dstar, X, V, L,start, tol = 1e-8, maxit = 1000){
   n <- length(Dstar)
 
