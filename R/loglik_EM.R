@@ -52,17 +52,14 @@
 
 
 loglik_EM <- function(Dstar, X, V, L,start, tol = 1e-8, maxit = 1000){
+
   n <- length(Dstar)
-
-  expit <- function(x)
-  {
-    exp(x)/(1+exp(x))
-  }
-
+  #the dimension of X
+  K = ncol(X)
   ####### initialise parameter for EM
-  theta <- start[c(1:2)]
-  beta  <- start[c(3:4)]
-  gamma <- start[c(5:6)]
+  theta <- start[c(1:(K+1))]
+  beta  <- start[c((K+2):(K+3))]
+  gamma <- start[c((K+4):(K+5))]
   pred1 <- expit(cbind(1, X) %*% theta)
   pred2 <- expit(cbind(1, V) %*% beta)
   pred3 <- expit(cbind(1, L) %*% gamma)
